@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatTableModule,
     MatTooltipModule,
+    // FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
