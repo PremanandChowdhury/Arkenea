@@ -1,25 +1,41 @@
 <h2 class="mat-dialog-title">Edit User</h2>
-<!-- <mat-dialog-content [formGroup]="editForm">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Placeholder" />
-  </mat-form-field> -->
 
-<!-- <div>
-    <label>Gender</label>
-    <mat-radio-group [formControl]="floatLabelControl">
-      <mat-radio-button value="auto">Male</mat-radio-button>
-      <mat-radio-button value="always">Female</mat-radio-button>
+<form [formGroup]="editForm">
+  <mat-divider></mat-divider>
+  <div class="container">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Placeholder" formControlName="user_name">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email">
+    </mat-form-field>
+    
+    <mat-radio-group formControlName="gender">
+      <mat-label>Gender</mat-label>
+      <mat-radio-button  name="gender" value="Male">Male</mat-radio-button>
+      <mat-radio-button name="gender" value="female">Female</mat-radio-button>
     </mat-radio-group>
-  </div> -->
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date_of_birth">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+    
+  </div>
+</form>
 
-<!-- <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Placeholder" />
-  </mat-form-field>
-</mat-dialog-content> -->
-
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button class="mat-raised-button mat-primary" (click)="submit()">
     Submit
   </button>

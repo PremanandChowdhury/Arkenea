@@ -128,9 +128,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -157,23 +157,46 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.id + 1
-    }`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1
+      }`;
   }
 
-  // !TODO : Action Functionality
   openEditDialog(item: any) {
-    console.log('>> Edit Item', item);
-    this.dialog.open(EditDialogComponent, {
+    // console.log('>> Edit Item', item);
+    const d = this.dialog.open(EditDialogComponent, {
+      minHeight: '40%',
+      minWidth: '45%',
       data: item,
     });
+    d.afterClosed().subscribe(res => {
+      if (res !== undefined) {
+        item.id = res.id;
+        item.user_name = res.user_name;
+        item.email = res.email;
+        item.gender = res.gender;
+        item.address = res.address;
+        item.date_of_birth = new Date(res.date_of_birth);
+      }
+    })
   }
 
-  openDeleteDialog(item: any, itemId: any) {
-    console.log('>> Delete Item with id', itemId);
-    this.dialog.open(DeleteDialogComponent, {
-      data: [item, itemId],
+  openDeleteDialog(item: any) {
+    const d = this.dialog.open(DeleteDialogComponent, {
+      // height:'30%',
+      data: item,
     });
+    d.afterClosed().subscribe((res: any) => {
+      if (res === true) {
+        let a: any = []
+        this.dataSource.filteredData.forEach(e => {
+          if (item.id !== e.id) {
+            a.push(e)
+          }
+        })
+        this.dataSource = new MatTableDataSource(a);
+        this.dataSource.paginator = this.paginator;
+        this.selection.clear();
+      }
+    })
   }
 }

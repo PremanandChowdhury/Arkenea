@@ -1,5 +1,5 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,16 +8,23 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./edit-dialog.component.scss'],
 })
 export class EditDialogComponent implements OnInit {
-  // editForm: FormGroup | undefined
-
   constructor(
     // private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  ngOnInit(): void {}
 
+  editForm=new FormGroup({
+    user_name:new FormControl(this.data.user_name),
+    email:new FormControl(this.data.email),
+    date_of_birth:new FormControl(new Date(this.data.date_of_birth)),
+    gender:new FormControl(this.data.gender),
+    address:new FormControl(this.data.address),
+  })
+
+  ngOnInit(): void {
+  }
   submit() {
-    alert('Submittion Successfully!!');
+  this.dialogRef.close(this.editForm.value)  
   }
 }

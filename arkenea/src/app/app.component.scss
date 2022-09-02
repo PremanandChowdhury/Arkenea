@@ -29,6 +29,11 @@ table {
   width: 100%;
   margin-top: 1.25rem;
 }
+table th {
+  background-color: #00a99d !important;
+  color: #fff;
+  font-weight: 600;
+}
 
 // Progress card
 .progress-section {
@@ -41,4 +46,32 @@ table {
 .progress-bar {
   height: 7px;
   border-radius: 20px;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  .mat-table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      display: table;
+      border-collapse: collapse;
+      margin: 0px;
+  }
+  .mat-row,
+  .mat-header-row {
+      display: table-row;
+  }
+  .mat-cell,
+  .mat-header-cell {
+      word-wrap: initial;
+      display: table-cell;
+      padding: 0px 5px;
+      line-break: unset;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+  }
 }
