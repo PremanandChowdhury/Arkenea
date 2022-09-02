@@ -19,9 +19,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditDialogComponent, DeleteDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,5 +45,6 @@ import { MatListModule } from '@angular/material/list';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [EditDialogComponent, DeleteDialogComponent],
 })
 export class AppModule {}

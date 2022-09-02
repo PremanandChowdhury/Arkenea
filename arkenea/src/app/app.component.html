@@ -78,14 +78,13 @@
           </ng-container>
 
           <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
               <button
                 mat-icon-button
                 matTooltip="Click to Edit"
                 class="iconbutton"
-                (click)="edit(element)"
+                (click)="openEditDialog(element)"
               >
                 <mat-icon>edit</mat-icon>
               </button>
@@ -94,46 +93,12 @@
                 mat-icon-button
                 matTooltip="Click to Delete"
                 class="iconbutton"
-                (click)="delete(element.position)"
+                (click)="openDeleteDialog(element, element.position)"
               >
                 <mat-icon>delete</mat-icon>
               </button>
-            </mat-cell>
+            </td>
           </ng-container>
-
-          <!-- <ng-container matColumnDef="edit">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button
-                mat-icon-button
-                matTooltip="Click to Edit"
-                class="iconbutton"
-                color="primary"
-                (click)="edit(element)"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="delete">
-            <mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-            ></mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button
-                mat-icon-button
-                matTooltip="Click to Delete"
-                class="iconbutton"
-                (click)="delete(element.id)"
-                color="warn"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container> -->
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr
             mat-row

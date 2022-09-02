@@ -4,6 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 export interface PeriodicElement {
   id: number;
@@ -13,6 +16,9 @@ export interface PeriodicElement {
   address: string;
   date_of_birth: string;
 }
+// export interface DialogData {
+//   animal: 'panda' | 'unicorn' | 'lion';
+// }
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
@@ -104,7 +110,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'arkenea';
-
+  color: ThemePalette = 'primary';
+  mode: ProgressBarMode = 'determinate';
+  value = 50;
+  bufferValue = 75;
   displayedColumns: string[] = [
     'select',
     'user_name',
@@ -114,22 +123,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     'date_of_birth',
     'action',
   ];
-
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
-  color: ThemePalette = 'primary';
-  mode: ProgressBarMode = 'determinate';
-  value = 50;
-  bufferValue = 75;
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -158,11 +163,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   // !TODO : Action Functionality
-  edit(item: any) {
+  openEditDialog(item: any) {
     console.log('>> Edit Item', item);
+    this.dialog.open(EditDialogComponent, {
+      data: item,
+    });
   }
 
-  delete(itemId: any) {
+  openDeleteDialog(item: any, itemId: any) {
     console.log('>> Delete Item with id', itemId);
+    this.dialog.open(DeleteDialogComponent, {
+      data: [item, itemId],
+    });
   }
 }
